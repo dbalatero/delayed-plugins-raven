@@ -11,8 +11,8 @@ module Delayed::Plugins::Raven
       def error(job, error)
         begin
           ::Raven.capture_exception(error, {
-            configuration: ::Delayed::Plugins::Raven.raven_configuration,
-            extra: { delayed_job: get_job_json(job) }
+            :configuration => ::Delayed::Plugins::Raven.raven_configuration,
+            :extra => { :delayed_job => get_job_json(job) }
           })
         rescue Exception => e
           Rails.logger.error "Raven logging failed: #{e.class.name}: #{e.message}"
